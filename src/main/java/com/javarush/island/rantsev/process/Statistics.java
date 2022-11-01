@@ -32,7 +32,7 @@ public record Statistics(Model model) {
                 .collect(supplier, accumulator, combiner);
 
         System.out.println("\uD83C\uDF3F: " + vegetationCount);
-        statsMap.forEach((key, value) -> System.out.print(key.icon + ":\s" + value + "/" + key.maxOnLocation * Setting.get().getIslandWidth() * Setting.get().getIslandHeight() + "\s"));
+        statsMap.forEach((key, value) -> System.out.print(key.getIcon() + ":\s" + value + "/" + key.getMaxOnLocation() * Setting.get().getIslandWidth() * Setting.get().getIslandHeight() + "\s"));
         System.out.println();
     }
 }

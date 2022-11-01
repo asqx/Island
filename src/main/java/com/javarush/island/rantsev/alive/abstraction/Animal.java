@@ -24,18 +24,18 @@ public abstract class Animal implements Movable, Eat {
     public Animal(AnimalParameters animalParameters) {
         this.id = IdGenerator.get();
         this.animalParameters = animalParameters;
-        this.weight = animalParameters.weight;
-        this.satiety = animalParameters.satietyLimit;
+        this.weight = animalParameters.getWeight();
+        this.satiety = animalParameters.getSatietyLimit();
     }
     public boolean hunger() {
-        return !(satiety < animalParameters.satietyLimit);
+        return !(satiety < animalParameters.getSatietyLimit());
     }
     private void safeMove(Location fromLocation, Location[][] area) {
         if(move) return;
         fromLocation.getLock().lock();
         try {
             Location result = fromLocation;
-            for (int i = 0; i < animalParameters.speed; i++) {
+            for (int i = 0; i < animalParameters.getSpeed(); i++) {
                 Move[] moves = result.getAvailableDirections().moveList;
                 int randomIndex = Randomizer.RANDOM.nextInt(moves.length);
                 Coordinates delta = moves[randomIndex].getDelta();
@@ -46,8 +46,8 @@ public abstract class Animal implements Movable, Eat {
                 }
             }
             if (result != fromLocation) {
-                fromLocation.animalsMap.get(this.animalParameters.kind).remove(this);
-                result.animalsMap.get(this.animalParameters.kind).add(this);
+                fromLocation.animalsMap.get(this.animalParameters.getKind()).remove(this);
+                result.animalsMap.get(this.animalParameters.getKind()).add(this);
             }
             float satietyRes = satiety - animalParameters.getWastedSatietyPerStep();
             satiety = satietyRes <= 0 ? 0 : satietyRes;
@@ -68,11 +68,11 @@ public abstract class Animal implements Movable, Eat {
     private void safeReproduce(Location location) {
         location.getLock().lock();
         try {
-            ArrayList<Animal> list = location.animalsMap.get(animalParameters.kind);
+            ArrayList<Animal> list = location.animalsMap.get(animalParameters.getKind());
             if (list.size() < 2 ||
                           birth ||
                           !location.hasFreeSpace(this) ||
-                          !Randomizer.isSuccess(animalParameters.reproductionChance)
+                          !Randomizer.isSuccess(animalParameters.getReproductionChance())
             ) return;
             Animal young = createAnimal();
             young.birth = true;
@@ -91,7 +91,7 @@ public abstract class Animal implements Movable, Eat {
     }
     @Override
     public String toString() {
-        String result = animalParameters.icon + id + "S:\u001B[32m" + satiety;
+        String result = animalParameters.getIcon() + id + "S:\u001B[32m" + satiety;
         if (death) {
             result += "\u001B[35mD";
         }

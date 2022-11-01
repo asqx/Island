@@ -11,7 +11,7 @@ import java.util.Objects;
 
 public class Setting {
     private static final Setting SETTING = new Setting();
-    private static final String INIT_FILE = "setting.yaml";
+    private static final String FILE_SETTING = "setting.yaml";
     private int islandWidth;
     private int islandHeight;
     private int corePoolSize;
@@ -22,7 +22,7 @@ public class Setting {
     private String vegetationIcon;
     private Map<String, AnimalParameters> animalProps;
     private Setting() {
-        URL source = Setting.class.getClassLoader().getResource(INIT_FILE);
+        URL source = Setting.class.getClassLoader().getResource(FILE_SETTING);
         ObjectReader objectReader = new YAMLMapper().readerForUpdating(this);
         if (Objects.nonNull(source)) {
             try {

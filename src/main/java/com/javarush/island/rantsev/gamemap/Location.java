@@ -67,14 +67,14 @@ public class Location {
     private void spawn() {
         plant = new Plant();
         for (Animal animal : ANIMAL_GENERATION_LIST) {
-            int animalsCount = Randomizer.RANDOM.nextInt(animal.animalParameters.maxOnLocation);
+            int animalsCount = Randomizer.RANDOM.nextInt(animal.animalParameters.getMaxOnLocation());
             ArrayList<Animal> animalList = new ArrayList<>();
 
             for (int i = 0; i < animalsCount; i++) {
                 animalList.add(tryToCreateNewAnimal(animal));
             }
 
-            animalsMap.put(animal.animalParameters.kind, animalList);
+            animalsMap.put(animal.animalParameters.getKind(), animalList);
         }
     }
     public void getAnimals(Consumer<Animal> consumer) {
@@ -123,9 +123,9 @@ public class Location {
 
     public boolean hasFreeSpace(Animal animal) {
         AnimalParameters animalParameters = animal.animalParameters;
-        ArrayList<Animal> list = animalsMap.get(animalParameters.kind);
+        ArrayList<Animal> list = animalsMap.get(animalParameters.getKind());
 
-        return list.size() < animalParameters.maxOnLocation;
+        return list.size() < animalParameters.getMaxOnLocation();
     }
 
     public Route getAvailableDirections() {

@@ -1,21 +1,21 @@
-islandWidth: 3
-islandHeight: 3
-corePoolSize: 1 # couldn't do multithreading.
-lifeCycleDuration: 100 # mills
-maxVegetationOnLocation: 200
-vegetationGrowPerStep: 200
-vegetationIcon: 🌿
-animalProps:
+islandWidth: 3 # Width island
+islandHeight: 3 # Hight island
+corePoolSize: 1 # Number of Cores
+lifeCycleDuration: 100 # Time for one beat
+maxVegetationOnLocation: 200 # Number of plants
+vegetationGrowPerStep: 200 # The number of plants that will grow per cycle
+vegetationIcon: 🌿 # Icon plants
+animalProps: # Settings animal
   Wolf:
-    kind: WOLF
-    icon: 🐺
-    speed: 3
-    weight: 50
-    maxOnLocation: 30
-    satietyLimit: 8
-    reproductionChance: 1
-    stepsCountWithoutFood: 10
-    menu:
+    kind: WOLF # Type
+    icon: 🐺 # Icon animal
+    speed: 3 # Number of steps across the field
+    weight: 50 # starting weight
+    maxOnLocation: 30 # Max on location
+    satietyLimit: 8 # Kilogram for satiety
+    reproductionChance: 1 # Chance reproduction
+    stepsCountWithoutFood: 10 # Count steps without food
+    menu: # What does he eat
       HORSE: 10
       DEER: 15
       RABBIT: 60

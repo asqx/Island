@@ -10,7 +10,7 @@ public interface EatPlant {
             float vegetationValue = location.plant.amount;
             if(vegetationValue <= 0) return;
 
-            float needVegetation = herbivore.animalParameters.satietyLimit - herbivore.satiety;
+            float needVegetation = herbivore.animalParameters.getSatietyLimit() - herbivore.satiety;
             float possibleValue = Math.min(needVegetation, vegetationValue);
             herbivore.satiety += possibleValue;
             location.plant.amount -= possibleValue;
